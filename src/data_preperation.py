@@ -60,26 +60,6 @@ def createFeatureMatrix(df):
     return feature_mx
 
 
-
-# Get Data directly from Database
-def getDataFromDatabase(date_from, date_to, time_from, time_to, city):
-    # Set up a connection to the postgres server.
-    print("Connecting to DB Server godzilla.kbs.uni-hannover.de.")
-    conn_string = "host=" + "godzilla.kbs.uni-hannover.de" + " port=" + "5432" + " dbname=" + "mobility-share" + " user=" + "schestakov"  + " password=" + "shestorka2019i"
-    conn = psycopg2.connect(conn_string)
-    print("Connected!")
-
-    sql_command = "SELECT * FROM public.graphsage_input WHERE time >= '" + date_from +" 00:00:00.000000' AND time <= '" + date_to + " 23:59:00.000000' " \
-                                                        "AND  extract(hour from time) >= " + time_from + " AND extract(hour from time) <= " + time_to + " AND name = '" + city +"' ORDER BY  time ASC ;"
-    print(sql_command)
-    # Load the data
-    data = pd.read_sql(sql_command, conn)
-    print(data.columns)
-
-    # There were duplicates in the data so remove them first
-    data = data.drop_duplicates()
-    return data
-
 # Get only one timestamp with the most streetIDs
 def get_single_timestamp(df):
     # As not every timestamp is complete take the timestamp with the most streetIDs
