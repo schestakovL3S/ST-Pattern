@@ -1,5 +1,4 @@
-# Zero-ST: Transferring Traffic Predictions to Urban Regions
-without Target Data
+# Zero-ST: Transferring Traffic Predictions to Urban Regions without Target Data
 
 The implementation consists of 5 parts:
 1. Feature Extraction: Extract a feature set for representing roads
